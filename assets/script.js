@@ -17,9 +17,9 @@ const slides = [
 	}
 ]
 
-let image = document.querySelector(".banner-img")
-let txt = document.querySelector("#banner p")
-console.log(txt)
+const image = document.querySelector(".banner-img")
+const txt = document.querySelector("#banner p")
+const dots = document.querySelector(".dots")
 let i = 0
 
 let flecheGauche = document.querySelector('.arrow_left')
@@ -27,7 +27,9 @@ flecheGauche.addEventListener("click", () => {
     console.log("Vous avez cliqué sur la flèche gauche")
     i--
     image.src = "./assets/images/slideshow/" + slides[i].image
-    txt.innerHTML = slides[i].tagLine 
+    txt.innerHTML = slides[i].tagLine
+	dot = points[i].classList.add("dot_selected")
+	dot = points[i+1].classList.remove("dot_selected")
 })
 
 
@@ -37,17 +39,21 @@ flecheDroite.addEventListener("click", () => {
     i++ 
     image.src = "./assets/images/slideshow/" + slides[i].image
     txt.innerHTML = slides[i].tagLine
+	dot = points[i].classList.add("dot_selected")
+	dot = points[i-1].classList.remove("dot_selected")
 })
 
-let nbSlides = slides.length
+const nbSlides = slides.length
 console.log(nbSlides)
-
-let dots = document.querySelector(".dots")
-console.log(dots)
+console.log(dots[1])
 
 
 for(let i=0; i < slides.length; i++) {
-    dot = document.createElement("div")
+    const dot = document.createElement("div")
     dots.appendChild(dot)
     dot.classList.add("dot")
 }
+
+const points = document.querySelectorAll(".dot")
+dot = points[0].classList.add("dot_selected")
+console.log(points)
