@@ -17,36 +17,11 @@ const slides = [
 	}
 ]
 
+const nbSlides = slides.length
 const image = document.querySelector(".banner-img")
 const txt = document.querySelector("#banner p")
 const dots = document.querySelector(".dots")
 let i = 0
-
-let flecheGauche = document.querySelector('.arrow_left')
-flecheGauche.addEventListener("click", () => {
-    console.log("Vous avez cliqué sur la flèche gauche")
-    i--
-    image.src = "./assets/images/slideshow/" + slides[i].image
-    txt.innerHTML = slides[i].tagLine
-	dot = points[i].classList.add("dot_selected")
-	dot = points[i+1].classList.remove("dot_selected")
-})
-
-
-let flecheDroite = document.querySelector('.arrow_right')
-flecheDroite.addEventListener("click", () => {
-    console.log("Vous avez cliqué sur la flèche droite")
-    i++ 
-    image.src = "./assets/images/slideshow/" + slides[i].image
-    txt.innerHTML = slides[i].tagLine
-	dot = points[i].classList.add("dot_selected")
-	dot = points[i-1].classList.remove("dot_selected")
-})
-
-const nbSlides = slides.length
-console.log(nbSlides)
-console.log(dots[1])
-
 
 for(let i=0; i < slides.length; i++) {
     const dot = document.createElement("div")
@@ -56,4 +31,34 @@ for(let i=0; i < slides.length; i++) {
 
 const points = document.querySelectorAll(".dot")
 dot = points[0].classList.add("dot_selected")
-console.log(points)
+
+let flecheDroite = document.querySelector('.arrow_right')
+flecheDroite.addEventListener("click", () => {
+    console.log("Vous avez cliqué sur la flèche droite")
+    i++
+	if(i > slides.length -1){
+		i = 0
+		dot = points[points.length-1].classList.remove("dot_selected")
+		dot = points[0].classList.add("dot_selected")
+	}
+    document.querySelector(".banner-img").src = "./assets/images/slideshow/" + slides[i].image
+    txt.innerHTML = slides[i].tagLine
+	dot = points[i].classList.add("dot_selected")
+	dot = points[i-1].classList.remove("dot_selected")
+})
+
+
+let flecheGauche = document.querySelector('.arrow_left')
+flecheGauche.addEventListener("click", () => {
+    console.log("Vous avez cliqué sur la flèche gauche")
+    i--
+	if(i < 0){
+		i = slides.length - 1
+		dot = points[0].classList.remove("dot_selected")
+		dot = points[points.length-1].classList.add("dot_selected")
+	}
+    document.querySelector(".banner-img").src = "./assets/images/slideshow/" + slides[i].image
+    txt.innerHTML = slides[i].tagLine
+	dot = points[i].classList.add("dot_selected")
+	dot = points[i+1].classList.remove("dot_selected")
+})
